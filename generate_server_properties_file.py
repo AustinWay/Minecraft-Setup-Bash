@@ -1,0 +1,83 @@
+import os
+import time
+from colorama import Fore, Back, Style 
+from datetime import datetime
+from os import path
+
+def write_file():
+    f = open("server.properties.txt", "w")
+    f.write("#Minecraft server properties\n")
+    f.write(str(time))
+    f.write("spawn-protection=16\n")
+    f.write("max-tick-time=60000\n")
+    f.write("query.port=25565\n")
+    f.write("generator-settings=\n")
+    f.write("sync-chunk-writes=true\n")
+    f.write("force-gamemode=false\n")
+    f.write("allow-nether=true\n")
+    f.write("enforce-whitelist=false\n")
+    f.write("gamemode=survival\n")
+    f.write("broadcast-console-to-ops=true\n")
+    f.write("enable-query=false\n")
+    f.write("player-idle-timeout=0\n")
+    f.write("difficulty=easy\n")
+    f.write("spawn-monsters=true\n")
+    f.write("broadcast-rcon-to-ops=true\n")
+    f.write("op-permission-level=4\n")
+    f.write("pvp=true\n")
+    f.write("entity-broadcast-range-percentage=100\n")
+    f.write("snooper-enabled=true\n")
+    f.write("level-type=default\n")
+    f.write("hardcore=false\n")
+    f.write("enable-status=true\n")
+    f.write("enable-command-block=false\n")
+    f.write("max-players=20\n")
+    f.write("network-compression-threshold=256\n")
+    f.write("resource-pack-sha1=\n")
+    f.write("max-world-size=29999984\n")
+    f.write("function-permission-level=2\n")
+    f.write("rcon.port=25575\n")
+    f.write("server-port=25565\n")
+    f.write("server-ip=\n")
+    f.write("spawn-npcs=true\n")
+    f.write("allow-flight=false\n")
+    f.write("level-name=world\n")
+    f.write("view-distance=10\n")
+    f.write("resource-pack=\n")
+    f.write("spawn-animals=true\n")
+    f.write("white-list=false\n")
+    f.write("rcon.password=\n")
+    f.write("generate-structures=true\n")
+    f.write("max-build-height=256\n")
+    f.write("online-mode=true\n")
+    f.write("level-seed=\n")
+    f.write("use-native-transport=true\n")
+    f.write("prevent-proxy-connections=false\n")
+    f.write("enable-jmx-monitoring=false\n")
+    f.write("enable-rcon=false\n")
+    f.write("rate-limit=0\n")
+    f.write("motd=A Minecraft Server")
+    f.close()
+
+now = datetime.now()
+time = now.strftime("#%c\n")
+
+if path.exists("server.properties") == True:
+    try:
+        os.rename(r'server.properties', r'server.properties.txt')
+        write_file()
+        os.rename(r'server.properties.txt', r'server.properties')
+    except FileNotFoundError:
+        os.rename(r'server.properties.txt', r'server.properties')
+        write_file()
+        os.rename(r'server.properties', r'server.properties.txt')
+    except:
+        print(Fore.RED + "Error: File either does not exist or unable to write to file!")
+else: 
+    print(Fore.YELLOW + "Creating and writing server.properties file")
+    write_file()
+    os.rename(r'server.properties.txt', r'server.properties')
+
+print(Style.RESET_ALL) 
+f = open("server.properties", "r")
+print(f.read())
